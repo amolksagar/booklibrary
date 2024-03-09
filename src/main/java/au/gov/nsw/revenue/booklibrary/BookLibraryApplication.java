@@ -2,20 +2,20 @@ package au.gov.nsw.revenue.booklibrary;
 
 import au.gov.nsw.revenue.booklibrary.entity.Employee;
 import au.gov.nsw.revenue.booklibrary.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class BookLibraryApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(BookLibraryApplication.class, args);
     }
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public void run(String... args) {

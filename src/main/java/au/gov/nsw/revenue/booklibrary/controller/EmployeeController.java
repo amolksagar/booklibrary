@@ -2,7 +2,7 @@ package au.gov.nsw.revenue.booklibrary.controller;
 
 import au.gov.nsw.revenue.booklibrary.entity.Employee;
 import au.gov.nsw.revenue.booklibrary.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +13,10 @@ import java.util.List;
 @CrossOrigin("http://localhost:3000/")
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @GetMapping("/employees")
     public List<Employee> fetchEmployees(){
