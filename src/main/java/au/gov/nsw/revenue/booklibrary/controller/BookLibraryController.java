@@ -2,6 +2,7 @@ package au.gov.nsw.revenue.booklibrary.controller;
 
 import au.gov.nsw.revenue.booklibrary.openapi.api.BookLibraryApi;
 import au.gov.nsw.revenue.booklibrary.openapi.model.Book;
+import au.gov.nsw.revenue.booklibrary.openapi.model.DeleteBooks;
 import au.gov.nsw.revenue.booklibrary.openapi.model.UpdateBook;
 import au.gov.nsw.revenue.booklibrary.service.BookLibraryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,6 +33,12 @@ public class BookLibraryController implements BookLibraryApi {
     public ResponseEntity<BigDecimal> deleteBook(BigDecimal bookId) {
         bookLibraryService.delete(bookId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @Override
+    public ResponseEntity<BigDecimal> deleteBooks(DeleteBooks deleteBooks) {
+       bookLibraryService.deleteBooks(deleteBooks);
+       return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Override

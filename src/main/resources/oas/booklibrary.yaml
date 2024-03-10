@@ -241,6 +241,35 @@ paths:
           description: Internal Server Error
           content: { }
       deprecated: false
+  /book-library/v1/deleteBooks:
+    delete:
+      tags:
+        - Book Library API
+      summary: deleteBooks
+      operationId: deleteBooks
+      requestBody:
+        description: deleteBooksRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBooks'
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+        400:
+          description: Bad Request
+          content: { }
+        401:
+          description: Unauthorized
+          content: { }
+        500:
+          description: Internal Server Error
+          content: { }
+      deprecated: false
 components:
   schemas:
     BookLibraryApiError:
@@ -323,5 +352,14 @@ components:
           example: "Borrowed"
           description: Status of the book in the library
           enum:
-            - Borrowed
-            - Available
+            - BORROWED
+            - AVAILABLE
+    DeleteBooks:
+      title: DeleteBooks
+      type: object
+      properties:
+        idsToDelete:
+          type: array
+          items:
+            type: number
+

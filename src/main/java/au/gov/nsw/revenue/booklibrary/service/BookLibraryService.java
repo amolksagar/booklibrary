@@ -3,6 +3,7 @@ package au.gov.nsw.revenue.booklibrary.service;
 
 import au.gov.nsw.revenue.booklibrary.mapper.BookMapper;
 import au.gov.nsw.revenue.booklibrary.openapi.model.Book;
+import au.gov.nsw.revenue.booklibrary.openapi.model.DeleteBooks;
 import au.gov.nsw.revenue.booklibrary.openapi.model.UpdateBook;
 import au.gov.nsw.revenue.booklibrary.repository.BookRepository;
 import jakarta.transaction.Transactional;
@@ -45,5 +46,11 @@ public class BookLibraryService {
 
     public void delete(BigDecimal bookId) {
         bookRepository.deleteById(bookId.longValue());
+    }
+
+    public void deleteBooks(DeleteBooks deleteBooks) {
+        deleteBooks.getIdsToDelete().forEach(bookId -> {
+            bookRepository.deleteById(bookId.longValue());
+        });
     }
 }
