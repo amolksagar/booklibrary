@@ -1,0 +1,327 @@
+openapi: "3.0.3"
+info:
+  title: Book Library Service
+  version: "1.0"
+servers:
+  - url: https://api.server.test/v1
+tags:
+  - name: Book Library Health Check
+    description: The API enables a client to check if the Book Library service is healthy.
+  - name: Book Library API
+    description: The API endpoints enables a client to perform CRUD operations on book library.
+paths:
+  /book-library-monitoring/health:
+    get:
+      tags:
+        - Book Library Health Check
+      summary: The API enables a client to check if the Book Library service is healthy.
+      operationId: healthUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceStatus'
+        400:
+          description: Bad Request
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        500:
+          description: Internal Server Error
+          content: {}
+      deprecated: false
+  /book-library/v1/books:
+    get:
+      tags:
+        - Book Library API
+      summary: Retrieve All Books in the library
+      operationId: retrieveAllBooks
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          description: This error occurs when there is a validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        408:
+          description: This error occurs when request times out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        500:
+          description: Internal Server Error has occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        501:
+          description: Not implemented - Specified resource is not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        503:
+          description: Service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        401:
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+      deprecated: false
+  /book-library/v1/booksByAuthor:
+    get:
+      tags:
+        - Book Library API
+      summary: Retrieve all books by an Author
+      operationId: retrieveAllBooksByAuthor
+      parameters:
+        - name: authorId
+          in: query
+          description: Author Id
+          schema:
+            type: string
+            example: 1234
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          description: This error occurs when there is a validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        408:
+          description: This error occurs when request times out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        500:
+          description: Internal Server Error has occured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        501:
+          description: Not implemented - Specified resource is not implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        503:
+          description: Service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+        401:
+          description: Authentication Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookLibraryApiError'
+      deprecated: false
+  /book-library/v1/book:
+    post:
+      tags:
+        - Book Library API
+      summary: createBook
+      operationId: createBook
+      requestBody:
+        description: createBook
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        201:
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        400:
+          description: Bad Request
+          content: { }
+        401:
+          description: Unauthorized
+          content: { }
+        500:
+          description: Internal Server Error
+          content: { }
+      deprecated: false
+  /book-library/v1/updateBook:
+    put:
+      tags:
+        - Book Library API
+      summary: updateBook
+      operationId: updateBook
+      parameters:
+        - name: bookId
+          in: query
+          description: Unique identifier of book
+          required: true
+          schema:
+            type: number
+      requestBody:
+        description: updateBookRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBook'
+        required: true
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+        400:
+          description: Bad Request
+          content: { }
+        401:
+          description: Unauthorized
+          content: { }
+        500:
+          description: Internal Server Error
+          content: { }
+      deprecated: false
+  /book-library/v1/deleteBook:
+    delete:
+      tags:
+        - Book Library API
+      summary: deleteBook
+      operationId: deleteBook
+      parameters:
+        - name: bookId
+          in: query
+          description: Unique identifier of book
+          required: true
+          schema:
+            type: number
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+        400:
+          description: Bad Request
+          content: { }
+        401:
+          description: Unauthorized
+          content: { }
+        500:
+          description: Internal Server Error
+          content: { }
+      deprecated: false
+components:
+  schemas:
+    BookLibraryApiError:
+      title: BookLibraryApiError
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        debugMessage:
+          type: string
+    ServiceStatus:
+      title: ServiceStatus
+      type: object
+      properties:
+        status:
+          type: string
+    Book:
+      title: Book
+      type: object
+      required:
+        - title
+        - authors
+      properties:
+        bookId:
+          type: number
+          example:  1234
+          description: Unique Identifier of the Book
+          readOnly: true
+        title:
+          type: string
+          example: "Harry Potter"
+          description: Title of the book to be Added to the library
+        borrowedBy:
+          type: string
+          example: "John Smith"
+          description: Name of the person who borrowed the book
+        status:
+          type: string
+          example: "Borrowed"
+          description: Status of the book in the library
+          enum:
+            - BORROWED
+            - AVAILABLE
+        authors:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/AuthorDetails'
+    AuthorDetails:
+      title: AuthorDetails
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: string
+          example: "John"
+          description: The first name of the Author
+        lastName:
+          type: string
+          example: "Samuel"
+          description: The lastname of the Author
+        middleName:
+          type: string
+          example: "George"
+          description: The middle name of the Author
+    UpdateBook:
+      title: UpdateBook
+      type: object
+      properties:
+        borrowedBy:
+          type: string
+          example: "John Smith"
+          description: Name of the person who borrowed the book
+        status:
+          type: string
+          example: "Borrowed"
+          description: Status of the book in the library
+          enum:
+            - Borrowed
+            - Available
