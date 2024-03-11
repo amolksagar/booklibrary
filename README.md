@@ -1,5 +1,5 @@
 A) **Steps to run the project in default profile**
-- **Step 1**: Clone the repository shared(using the command given) or download the zipped version
+- **Step 1**: Clone the repository shared(using the command given)
   **"git clone https://github.com/amolksagar/booklibrary.git"**
 
 - **Step 2**:
@@ -19,13 +19,11 @@ A) **Steps to run the project in default profile**
   The yaml file can be found at https://github.com/amolksagar/booklibrary/blob/master/src/main/resources/oas/booklibrary.yaml or you can find the same in the zip file of the code I have shared
 - **Step 6**:
   The postman collection to test the multiple use cases has been provided too.
-  Please run the postman collection named **"Transfer Registration"**
-
-**Important Points:**
-- CustomExceptionHandler has been implemented which will customise the messages sent back in a particular format
-- Basic Auth has been implemented
-- Profile based logging has been implemented
-- Names of the tests in Postman are such that they will give an idea as to what use case is in question
+  Please run the postman collection named **"RNSW"**
+- **Step 7**:
+  The h2 db console is hosted at http://localhost:8082/booklibrary/h2-console/
+  Enter the jdbc url from the application context logs.Search for text 'H2 console available at '/h2-console'. Database available at'
+  You will find the jdbc url.Please note the jdbc url changes with each application launch Eg format:jdbc:h2:mem:a1a6c333-7f2d-4348-a9b2-6903657439f8
 
 
 **Testing Done:**
