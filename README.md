@@ -24,8 +24,10 @@ A) **Steps to run the project in default profile**
   The h2 db console is hosted at http://localhost:8082/booklibrary/h2-console/
   Enter the jdbc url from the application context logs.Search for text 'H2 console available at '/h2-console'. Database available at'
   You will find the jdbc url.Please note the jdbc url changes with each application launch Eg format:jdbc:h2:mem:a1a6c333-7f2d-4348-a9b2-6903657439f8
-- **Step 8**:
-  A few book entries have been added during application load so that the library wont be empty initially 
+
+**Important points**:
+  - A few book entries have been added during application load so that the library wont be empty initially
+  - Caching has been implemented for the STATUS table which is a lookup table holding the statusId vs the Status description
 
 **Testing Done:**
 - Units tests
