@@ -9,7 +9,7 @@ import au.gov.nsw.revenue.booklibrary.repository.BookRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Sort;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,9 @@ public class BookLibraryService {
         return bookMapper.toBookDto(bookRepository.save(book),statusService.getStatusDescriptionByStatusId(statusId));
     }
 
-    public List<Book> findAllBooks(){
-      List<au.gov.nsw.revenue.booklibrary.entity.Book> books = bookRepository.findAll();
+    public List<Book> findAllBooks(String sortBy){
+      Sort sortOrder = Sort.by(sortBy);
+      List<au.gov.nsw.revenue.booklibrary.entity.Book> books = bookRepository.findAll(sortOrder);
       List<Book> bookDTOs = new ArrayList<>();
         books.forEach(book -> {
             bookDTOs.add(bookMapper.toBookDto(book, statusService.getStatusDescriptionByStatusId(book.getStatusId())));

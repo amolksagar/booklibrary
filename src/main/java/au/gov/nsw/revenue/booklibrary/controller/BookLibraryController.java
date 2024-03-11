@@ -42,8 +42,8 @@ public class BookLibraryController implements BookLibraryApi {
     }
 
     @Override
-    public ResponseEntity<List<Book>> retrieveAllBooks() {
-        return ResponseEntity.status(HttpStatus.OK).body(bookLibraryService.findAllBooks());
+    public ResponseEntity<List<Book>> retrieveAllBooks(String sortBy) {
+        return ResponseEntity.status(HttpStatus.OK).body(bookLibraryService.findAllBooks(sortBy));
     }
 
     @Override

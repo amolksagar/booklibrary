@@ -39,6 +39,13 @@ paths:
         - Book Library API
       summary: Retrieve All Books in the library
       operationId: retrieveAllBooks
+      parameters:
+        - name: sortBy
+          in: query
+          description: Sort By Column
+          schema:
+            type: string
+            example: title
       responses:
         200:
           description: OK
