@@ -318,27 +318,7 @@ components:
         authors:
           type: array
           items:
-            type: object
-            $ref: '#/components/schemas/AuthorDetails'
-    AuthorDetails:
-      title: AuthorDetails
-      type: object
-      required:
-        - firstName
-        - lastName
-      properties:
-        firstName:
-          type: string
-          example: "John"
-          description: The first name of the Author
-        lastName:
-          type: string
-          example: "Samuel"
-          description: The lastname of the Author
-        middleName:
-          type: string
-          example: "George"
-          description: The middle name of the Author
+            type: string
     UpdateBook:
       title: UpdateBook
       type: object

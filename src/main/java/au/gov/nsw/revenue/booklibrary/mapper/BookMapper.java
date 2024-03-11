@@ -1,8 +1,6 @@
 package au.gov.nsw.revenue.booklibrary.mapper;
 
 import au.gov.nsw.revenue.booklibrary.entity.Author;
-import au.gov.nsw.revenue.booklibrary.entity.Status;
-import au.gov.nsw.revenue.booklibrary.openapi.model.AuthorDetails;
 import au.gov.nsw.revenue.booklibrary.openapi.model.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -28,21 +26,32 @@ public interface BookMapper {
             target = "status",
             source = "statusDescriptionByStatusId",
             qualifiedByName = "getStatus")
+    @Mapping(
+            target = "authors",
+            source = "book.authors",
+            qualifiedByName = "convertListOfAuthorEntitiesToStringList")
     Book toBookDto(au.gov.nsw.revenue.booklibrary.entity.Book book, String statusDescriptionByStatusId);
 
     @Named("getAuthors")
-    default List<Author> getAuthors(List<AuthorDetails> authorDetails) {
+    default List<Author> getAuthors(List<String> authorDetails) {
         List<Author> authors = new ArrayList<>();
-        for (AuthorDetails authorDetail : authorDetails) {
-            authors.add(Author.builder().firstName(authorDetail.getFirstName())
-                    .middleName(authorDetail.getMiddleName())
-                    .lastName(authorDetail.getLastName()).build());
+        for (String authorFullName : authorDetails) {
+            authors.add(Author.builder().fullName(authorFullName).build());
         }
         return authors;
     }
 
     @Named("getStatus")
-    default Book.StatusEnum getAuthors(String statusDescriptionByStatusId) {
+    default Book.StatusEnum getStatus(String statusDescriptionByStatusId) {
         return Book.StatusEnum.fromValue(statusDescriptionByStatusId);
+    }
+
+    @Named("convertListOfAuthorEntitiesToStringList")
+    default List<String> convertListOfAuthorEntitiesToStringList(List<Author> authorDetails) {
+        List<String> authors = new ArrayList<>();
+        for (Author authorDetail : authorDetails) {
+            authors.add(authorDetail.getFullName());
+        }
+        return authors;
     }
 }

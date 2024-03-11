@@ -21,12 +21,7 @@ public class Author extends BaseEntity implements Serializable {
     private Long authorId;
 
     @Column(nullable = false)
-    private String firstName;
-
-    private String middleName;
-
-    @Column(nullable = false)
-    private String lastName;
+    private String fullName;
 
     @JsonIgnore
     @Column(nullable = false)
