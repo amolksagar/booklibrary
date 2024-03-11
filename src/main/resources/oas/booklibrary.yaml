@@ -92,65 +92,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/BookLibraryApiError'
       deprecated: false
-  /book-library/v1/booksByAuthor:
-    get:
-      tags:
-        - Book Library API
-      summary: Retrieve all books by an Author
-      operationId: retrieveAllBooksByAuthor
-      parameters:
-        - name: authorId
-          in: query
-          description: Author Id
-          schema:
-            type: string
-            example: 1234
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-        400:
-          description: This error occurs when there is a validation error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookLibraryApiError'
-        408:
-          description: This error occurs when request times out
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookLibraryApiError'
-        500:
-          description: Internal Server Error has occured
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookLibraryApiError'
-        501:
-          description: Not implemented - Specified resource is not implemented
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookLibraryApiError'
-        503:
-          description: Service is unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookLibraryApiError'
-        401:
-          description: Authentication Failed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookLibraryApiError'
-      deprecated: false
   /book-library/v1/book:
     post:
       tags:
@@ -201,36 +142,6 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateBook'
         required: true
-      responses:
-        201:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: number
-        400:
-          description: Bad Request
-          content: { }
-        401:
-          description: Unauthorized
-          content: { }
-        500:
-          description: Internal Server Error
-          content: { }
-      deprecated: false
-  /book-library/v1/deleteBook:
-    delete:
-      tags:
-        - Book Library API
-      summary: deleteBook
-      operationId: deleteBook
-      parameters:
-        - name: bookId
-          in: query
-          description: Unique identifier of book
-          required: true
-          schema:
-            type: number
       responses:
         201:
           description: OK
@@ -330,10 +241,6 @@ components:
       title: UpdateBook
       type: object
       properties:
-        borrowedBy:
-          type: string
-          example: "John Smith"
-          description: Name of the person who borrowed the book
         status:
           type: string
           example: "Borrowed"

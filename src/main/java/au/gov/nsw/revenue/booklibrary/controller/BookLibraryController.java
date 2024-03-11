@@ -30,12 +30,6 @@ public class BookLibraryController implements BookLibraryApi {
     }
 
     @Override
-    public ResponseEntity<BigDecimal> deleteBook(BigDecimal bookId) {
-        bookLibraryService.delete(bookId);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @Override
     public ResponseEntity<BigDecimal> deleteBooks(DeleteBooks deleteBooks) {
        bookLibraryService.deleteBooks(deleteBooks);
        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -44,11 +38,6 @@ public class BookLibraryController implements BookLibraryApi {
     @Override
     public ResponseEntity<List<Book>> retrieveAllBooks(String sortBy) {
         return ResponseEntity.status(HttpStatus.OK).body(bookLibraryService.findAllBooks(sortBy));
-    }
-
-    @Override
-    public ResponseEntity<List<Book>> retrieveAllBooksByAuthor(String authorId) {
-        return null;
     }
 
     @Override

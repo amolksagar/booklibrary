@@ -45,10 +45,6 @@ public class BookLibraryService {
         return bookId;
     }
 
-    public void delete(BigDecimal bookId) {
-        bookRepository.deleteById(bookId.longValue());
-    }
-
     public void deleteBooks(DeleteBooks deleteBooks) {
         deleteBooks.getIdsToDelete().forEach(bookId -> {
             bookRepository.deleteById(bookId.longValue());
