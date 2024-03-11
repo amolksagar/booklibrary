@@ -16,7 +16,7 @@ A) **Steps to run the project in default profile**
 - **Step 5**:
   Open API has been used to define the specification and swagger tools have been for implementing the Open API specifications. There are multiple benefits of using Open API which I have detailed below in a seperate section
   **Swagger URL** : http://localhost:8082/booklibrary/docs/swagger-ui/index.html#/
-  The yaml file can be found at https://github.com/amolksagar/booklibrary/blob/master/src/main/resources/oas/booklibrary.yaml or you can find the same in the zip file of the code I have shared
+  The yaml file can be found at https://github.com/amolksagar/booklibrary/blob/master/src/main/resources/oas/booklibrary.yaml
 - **Step 6**:
   The postman collection to test the multiple use cases has been provided too.
   Please run the postman collection named **"RNSW"**
